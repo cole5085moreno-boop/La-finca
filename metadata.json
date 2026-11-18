@@ -1,0 +1,6 @@
+{
+  "name": "LA FINCA",
+  "description": "Videojuego 3D de terror, supervivencia y mitología del norte argentino ambientado en General Güemes, Salta.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
