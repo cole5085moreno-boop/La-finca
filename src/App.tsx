@@ -8,6 +8,7 @@ import {
   PauseModal,
   RitualModal,
 } from './components/GameModals';
+import { IntroScreen } from './components/IntroScreen';
 import { MainMenu } from './components/MainMenu';
 import { CREATURE_CODEX, INITIAL_INVENTORY } from './game/data';
 import { GameEngine } from './game/engine/GameEngine';
@@ -65,7 +66,7 @@ export default function App() {
   const canvasMountRef = useRef<HTMLDivElement | null>(null);
   const engineRef = useRef<GameEngine | null>(null);
 
-  const [screen, setScreen] = useState<GameScreen>('menu');
+  const [screen, setScreen] = useState<GameScreen>('intro');
   const [settings, setSettings] = useState<GameSettings>(() =>
     SaveManager.loadSettings()
   );
@@ -227,6 +228,13 @@ export default function App() {
         className="absolute inset-0 w-full h-full"
         aria-label="Escenario 3D de La Finca"
       />
+
+      {/* Intro Presentation Screen */}
+      {screen === 'intro' && (
+        <div className="relative z-30 w-full h-full">
+          <IntroScreen onComplete={() => setScreen('menu')} />
+        </div>
+      )}
 
       {/* Main Menu */}
       {screen === 'menu' && (

@@ -1,4 +1,4 @@
-export type GameScreen = 'menu' | 'playing' | 'paused' | 'victory' | 'defeat';
+export type GameScreen = 'intro' | 'menu' | 'playing' | 'paused' | 'victory' | 'defeat';
 
 export type GameMode =
   | 'campaign'
