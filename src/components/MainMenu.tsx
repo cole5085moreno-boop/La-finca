@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   BookOpen,
   Compass,
@@ -9,6 +9,8 @@ import {
   Skull,
   Sparkles,
   Users,
+  Volume2,
+  VolumeX,
 } from 'lucide-react';
 import {
   CHALLENGES_LIST,
@@ -56,6 +58,9 @@ export const MainMenu: React.FC<MainMenuProps> = ({
   );
   const [selectedCreature, setSelectedCreature] = useState<CreatureId>('lobizon');
   const [imgError, setImgError] = useState<Record<string, boolean>>({});
+  const [videoError, setVideoError] = useState(false);
+  const [videoMuted, setVideoMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const latestSave = SaveManager.getLatestSave();
   const unlockedCodex = new Set(SaveManager.getUnlockedCodex());
@@ -66,10 +71,33 @@ export const MainMenu: React.FC<MainMenuProps> = ({
     onUpdateSettings(next);
   };
 
+  const toggleVideoAudio = () => {
+    const nextMuted = !videoMuted;
+    setVideoMuted(nextMuted);
+    if (videoRef.current) {
+      videoRef.current.muted = nextMuted;
+      if (!nextMuted && videoRef.current.paused) {
+        videoRef.current.play().catch(() => {});
+      }
+    }
+  };
+
   return (
     <div className="relative w-full h-full overflow-hidden bg-[#07090c] text-[#e7e5e0] select-none">
-      {/* Stormy Finca Backdrop */}
-      {!imgError.menu ? (
+      {/* Presentation Video Backdrop */}
+      {!videoError ? (
+        <video
+          ref={videoRef}
+          src="https://res.cloudinary.com/v7vzdizx/video/upload/v1795032566/fincavideo.mp4"
+          poster="/src/assets/images/menu_finca_storm_1795029178123.jpg"
+          autoPlay
+          loop
+          muted={videoMuted}
+          playsInline
+          onError={() => setVideoError(true)}
+          className="absolute inset-0 w-full h-full object-cover opacity-85"
+        />
+      ) : !imgError.menu ? (
         <img
           src="/src/assets/images/menu_finca_storm_1795029178123.jpg"
           alt="La Finca en General Güemes durante una noche de tormenta"
@@ -81,10 +109,9 @@ export const MainMenu: React.FC<MainMenuProps> = ({
         <div className="absolute inset-0 bg-gradient-to-br from-[#0a1017] via-[#12161d] to-[#08090c]" />
       )}
 
-      {/* Atmospheric Lightning & Contrast Scrims */}
-      <div className="absolute inset-0 bg-blue-100/20 pointer-events-none animate-lightning-overlay" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#07090c]/95 via-[#07090c]/65 to-[#07090c]/30 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#07090c] via-transparent to-[#07090c]/60 pointer-events-none" />
+      {/* Atmospheric Contrast Scrims for Legibility over Video */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#07090c]/90 via-[#07090c]/55 to-[#07090c]/20 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#07090c]/95 via-transparent to-[#07090c]/55 pointer-events-none" />
 
       {/* Main Layout */}
       <div className="relative z-10 h-full max-w-[1360px] mx-auto px-6 md:px-12 py-8 flex flex-col justify-between">
@@ -140,13 +167,13 @@ export const MainMenu: React.FC<MainMenuProps> = ({
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 w-full items-center">
               <div className="lg:col-span-6 space-y-6">
                 <div className="space-y-3">
-                  <p className="text-xs tracking-[0.22em] text-amber-400/90 uppercase font-medium">
-                    Cuando cae la noche, las leyendas despiertan
-                  </p>
-                  <h2 className="font-display text-4xl md:text-6xl font-bold tracking-wider text-stone-100 leading-tight [text-wrap:balance]">
-                    UNA NOCHE PUEDE CAMBIARLO TODO.
+                  <h2 className="font-display text-5xl md:text-7xl font-bold tracking-[0.14em] text-stone-100 leading-tight [text-wrap:balance]">
+                    LA FINCA
                   </h2>
-                  <p className="text-sm md:text-base text-stone-300/90 max-w-xl leading-relaxed">
+                  <p className="font-display text-base md:text-xl tracking-wide text-amber-300/95 italic max-w-xl [text-wrap:balance]">
+                    «No todas las leyendas son cuentos. Algunas viven en el monte».
+                  </p>
+                  <p className="text-sm md:text-base text-stone-300/90 max-w-xl leading-relaxed pt-1">
                     Eres el dueño de una antigua finca salteña rodeada de montes y
                     cañaverales. Cuando la tormenta corta los caminos y los perros ladran
                     hacia la oscuridad, deberás defender tu tierra del Lobizón, el
@@ -771,12 +798,32 @@ export const MainMenu: React.FC<MainMenuProps> = ({
         </main>
 
         {/* Subtle Footer */}
-        <footer className="flex items-center justify-between text-xs text-stone-500 border-t border-white/10 pt-4">
+        <footer className="flex items-center justify-between gap-4 text-xs text-stone-400 border-t border-white/10 pt-4">
           <span>LA FINCA · General Güemes, Salta</span>
-          <span className="flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-amber-500/70" />
-            Usa auriculares para el audio espacial 3D
-          </span>
+          <div className="flex items-center gap-4">
+            {!videoError && (
+              <button
+                onClick={toggleVideoAudio}
+                className="flex items-center gap-1.5 px-2.5 py-1 bg-white/5 hover:bg-white/10 border border-white/10 rounded text-stone-300 transition-colors cursor-pointer"
+              >
+                {videoMuted ? (
+                  <>
+                    <VolumeX className="w-3.5 h-3.5 text-stone-400" />
+                    Activar sonido del video
+                  </>
+                ) : (
+                  <>
+                    <Volume2 className="w-3.5 h-3.5 text-amber-400" />
+                    Silenciar video
+                  </>
+                )}
+              </button>
+            )}
+            <span className="hidden sm:flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-amber-500/70" />
+              Usa auriculares para el audio espacial 3D
+            </span>
+          </div>
         </footer>
       </div>
     </div>
