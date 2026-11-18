@@ -162,28 +162,23 @@ export const MainMenu: React.FC<MainMenuProps> = ({
         </header>
 
         {/* Center Content Area */}
-        <main className="flex-1 flex items-center py-6 min-h-0">
+        <main className="flex-1 flex items-end py-4 min-h-0">
           {tab === 'home' && (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 w-full items-center">
-              <div className="lg:col-span-6 space-y-6">
-                <div className="space-y-3">
-                  <h2 className="font-display text-5xl md:text-7xl font-bold tracking-[0.14em] text-stone-100 leading-tight [text-wrap:balance]">
-                    LA FINCA
-                  </h2>
-                  <p className="font-display text-base md:text-xl tracking-wide text-amber-300/95 italic max-w-xl [text-wrap:balance]">
-                    «No todas las leyendas son cuentos. Algunas viven en el monte».
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full items-end">
+              <div className="lg:col-span-5 space-y-4">
+                <div className="bg-[#07090c]/75 border border-white/10 rounded px-4 py-3 space-y-1.5 max-w-sm">
+                  <p className="font-display text-sm md:text-base tracking-wide text-amber-300 italic leading-snug">
+                    «No todas las leyendas son cuentos, algunas viven en el monte»
                   </p>
-                  <p className="text-sm md:text-base text-stone-300/90 max-w-xl leading-relaxed pt-1">
-                    Eres el dueño de una antigua finca salteña rodeada de montes y
-                    cañaverales. Cuando la tormenta corta los caminos y los perros ladran
-                    hacia la oscuridad, deberás defender tu tierra del Lobizón, el
-                    Ocumar, la Mulánima y el Duende.
+                  <p className="text-xs text-stone-300/90 leading-relaxed">
+                    Defiende tu finca salteña del Lobizón, el Ocumar, la Mulánima y el
+                    Duende.
                   </p>
                 </div>
 
                 <nav
                   aria-label="Menú principal"
-                  className="flex flex-col gap-2 max-w-sm pt-2"
+                  className="flex flex-col gap-1.5 max-w-sm"
                 >
                   {latestSave && (
                     <button
@@ -195,7 +190,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
                           latestSave
                         )
                       }
-                      className="flex items-center justify-between px-5 py-3 bg-amber-600/90 hover:bg-amber-500 text-stone-950 font-semibold text-sm rounded transition-colors cursor-pointer"
+                      className="flex items-center justify-between px-4 py-2.5 bg-amber-600/95 hover:bg-amber-500 text-stone-950 font-semibold text-sm rounded transition-colors cursor-pointer"
                     >
                       <span className="flex items-center gap-2.5 whitespace-nowrap">
                         <RotateCcw className="w-4 h-4" />
@@ -209,7 +204,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
 
                   <button
                     onClick={() => setTab('new_game')}
-                    className="flex items-center justify-between px-5 py-3 bg-[#151a22] hover:bg-[#1e2631] border border-white/15 text-stone-100 font-semibold text-sm rounded transition-colors cursor-pointer"
+                    className="flex items-center justify-between px-4 py-2.5 bg-[#151a22]/95 hover:bg-[#1e2631] border border-white/15 text-stone-100 font-semibold text-sm rounded transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-2.5 whitespace-nowrap">
                       <Play className="w-4 h-4 text-amber-400" />
@@ -220,7 +215,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
 
                   <button
                     onClick={() => setTab('chapters')}
-                    className="flex items-center justify-between px-5 py-2.5 bg-[#0e1218]/90 hover:bg-[#181f29] border border-white/10 text-stone-200 text-sm rounded transition-colors cursor-pointer"
+                    className="flex items-center justify-between px-4 py-2 bg-[#0e1218]/92 hover:bg-[#181f29] border border-white/10 text-stone-200 text-sm rounded transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-2.5 whitespace-nowrap">
                       <Compass className="w-4 h-4 text-stone-400" />
@@ -231,7 +226,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
 
                   <button
                     onClick={() => setTab('codex')}
-                    className="flex items-center justify-between px-5 py-2.5 bg-[#0e1218]/90 hover:bg-[#181f29] border border-white/10 text-stone-200 text-sm rounded transition-colors cursor-pointer"
+                    className="flex items-center justify-between px-4 py-2 bg-[#0e1218]/92 hover:bg-[#181f29] border border-white/10 text-stone-200 text-sm rounded transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-2.5 whitespace-nowrap">
                       <BookOpen className="w-4 h-4 text-stone-400" />
@@ -244,7 +239,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
 
                   <button
                     onClick={() => setTab('settings')}
-                    className="flex items-center justify-between px-5 py-2.5 bg-[#0e1218]/90 hover:bg-[#181f29] border border-white/10 text-stone-200 text-sm rounded transition-colors cursor-pointer"
+                    className="flex items-center justify-between px-4 py-2 bg-[#0e1218]/92 hover:bg-[#181f29] border border-white/10 text-stone-200 text-sm rounded transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-2.5 whitespace-nowrap">
                       <Settings className="w-4 h-4 text-stone-400" />
@@ -252,17 +247,17 @@ export const MainMenu: React.FC<MainMenuProps> = ({
                     </span>
                   </button>
 
-                  <div className="grid grid-cols-2 gap-2 pt-1">
+                  <div className="grid grid-cols-2 gap-1.5 pt-0.5">
                     <button
                       onClick={() => setTab('credits')}
-                      className="flex items-center justify-center gap-2 px-4 py-2 bg-[#0b0e13]/85 hover:bg-[#161c24] border border-white/10 text-stone-300 text-xs rounded transition-colors cursor-pointer"
+                      className="flex items-center justify-center gap-2 px-4 py-2 bg-[#0b0e13]/90 hover:bg-[#161c24] border border-white/10 text-stone-300 text-xs rounded transition-colors cursor-pointer"
                     >
                       <Users className="w-3.5 h-3.5" />
                       Créditos
                     </button>
                     <button
                       onClick={() => setTab('exit')}
-                      className="flex items-center justify-center gap-2 px-4 py-2 bg-[#0b0e13]/85 hover:bg-red-950/50 border border-white/10 text-stone-300 text-xs rounded transition-colors cursor-pointer"
+                      className="flex items-center justify-center gap-2 px-4 py-2 bg-[#0b0e13]/90 hover:bg-red-950/50 border border-white/10 text-stone-300 text-xs rounded transition-colors cursor-pointer"
                     >
                       <Skull className="w-3.5 h-3.5" />
                       Salir
@@ -271,13 +266,13 @@ export const MainMenu: React.FC<MainMenuProps> = ({
                 </nav>
               </div>
 
-              {/* Controls Quick Reference */}
-              <div className="lg:col-span-6 hidden lg:flex justify-end">
-                <div className="w-full max-w-md bg-[#0b0f15]/90 border border-white/10 rounded-lg p-6 space-y-4">
-                  <h3 className="font-display text-sm tracking-widest text-amber-400 uppercase">
+              {/* Compact Bottom-Right Controls Reference */}
+              <div className="lg:col-span-7 hidden lg:flex justify-end">
+                <div className="w-full max-w-sm bg-[#0b0f15]/88 border border-white/10 rounded-lg p-4 space-y-2.5">
+                  <h3 className="font-display text-xs tracking-widest text-amber-400 uppercase">
                     Controles de Campo
                   </h3>
-                  <div className="grid grid-cols-2 gap-y-2.5 gap-x-4 text-xs text-stone-300">
+                  <div className="grid grid-cols-2 gap-y-1.5 gap-x-3 text-[11px] text-stone-300">
                     <div>
                       <span className="font-mono-tabular text-stone-100">WASD</span> · Moverse
                     </div>
@@ -297,22 +292,12 @@ export const MainMenu: React.FC<MainMenuProps> = ({
                       <span className="font-mono-tabular text-stone-100">I / M</span> · Mochila / Mapa
                     </div>
                     <div>
-                      <span className="font-mono-tabular text-stone-100">Clic Izq.</span> · Atacar / Disparar
-                    </div>
-                    <div>
-                      <span className="font-mono-tabular text-stone-100">Clic Der.</span> · Apuntar
-                    </div>
-                    <div>
-                      <span className="font-mono-tabular text-stone-100">R</span> · Recargar
+                      <span className="font-mono-tabular text-stone-100">Clic Izq.</span> · Atacar
                     </div>
                     <div>
                       <span className="font-mono-tabular text-stone-100">V</span> · 1ra / 3ra Persona
                     </div>
                   </div>
-                  <p className="text-xs text-stone-400 pt-2 border-t border-white/10 leading-relaxed">
-                    Haz clic en el escenario durante la partida para fijar la cámara con el
-                    mouse o arrastra manteniendo presionado.
-                  </p>
                 </div>
               </div>
             </div>
@@ -767,7 +752,15 @@ export const MainMenu: React.FC<MainMenuProps> = ({
                 orales del norte argentino (General Güemes, Salta): El Lobizón, El Ocumar,
                 La Mulánima, El Duende del Monte, El Familiar y El Alma Mula.
               </p>
-              <div className="text-xs text-stone-400 space-y-1.5 pt-2">
+              <div className="border-y border-white/10 py-3">
+                <div className="text-xs uppercase tracking-wider text-stone-400">
+                  Autores y Dirección
+                </div>
+                <div className="font-display text-base font-semibold text-amber-300 mt-1">
+                  Prof. Gabriel Perez - Prof. Sergio Perez
+                </div>
+              </div>
+              <div className="text-xs text-stone-400 space-y-1.5 pt-1">
                 <div>Motor 3D en tiempo real: Three.js WebGL PBR + Iluminación Dinámica</div>
                 <div>Audio Espacial: Síntesis procedural Web Audio API 3D</div>
                 <div>Ambientación: Finca rural salteña, cañaverales y monte chaqueño</div>
